@@ -18,10 +18,24 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
 
     }
 
+    void Start()
+    {
+        for (int i = 0; i < upgradeTabs.Length; i++)
+        {
+            upgradeTabs[i].UpdatePrice(Settings.upgradeCost[i]);
+        }
+    }
+
     //buttons
     public void onBuyButton(int i)
     {
+        if (Settings.scoreVal < Settings.upgradeCost[i])
+            return;
 
+        Settings.scoreVal -= Settings.upgradeCost[i];
+        Settings.upgradeCost[i] *= 1.15f;
+        Settings.upgradeMultiplayer += Settings.upgradePerSecond[i];
+        upgradeTabs[i].UpdatePrice(Settings.upgradeCost[i]);
     }
 
     public void OnInfoButton(int i)
@@ -36,11 +50,11 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
     {
         for (int i = 0; i < upgradeTabs.Length; i++)
         {
-            if (upgradeTabs[i].locked && Settings.scoreVal / 2 >= Settings.upgradeCost[i])
+            if (upgradeTabs[i].locked && Settings.scoreVal >= Settings.upgradeCost[i]/2)
             {
                 upgradeTabs[i].Unlock();
             }
-            if (upgradeTabs[i].lockedPrice && Settings.scoreVal >= Settings.upgradeCost[i])
+            else if (Settings.scoreVal >= Settings.upgradeCost[i])
             {
                 upgradeTabs[i].UnlockPrice();
             }

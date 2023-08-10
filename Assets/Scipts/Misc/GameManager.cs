@@ -9,9 +9,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     [SerializeField] TextMeshProUGUI scoreText;
 
-    [SerializeField] GameObject updgradePanel;
-    [SerializeField] GameObject statsPanel;
-    [SerializeField] GameObject settingsPanel;
+    [SerializeField] GameObject updgradeTab;
+    [SerializeField] GameObject statsTab;
+    [SerializeField] GameObject settingsTab;
 
     bool inUpgrade;
     bool inStats;
@@ -26,41 +26,54 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     void Start()
     {
         Settings.scoreVal = 0;
+        Time.timeScale = 0.25f;
+    }
+
+    void FixedUpdate()
+    {
+        Debug.Log(Settings.upgradeMultiplayer);
+        Settings.scoreVal += Settings.upgradeMultiplayer;
+        UpdateScore();
     }
 
     //buttons
     public void onMainButtonPress()
     {
-        Settings.scoreVal += Settings.curMultiplayer;
+        Settings.scoreVal += Settings.clickMultiplayer;
         UpdateScore();
     }
 
-    public void onUpdateTabButton()
+    public void onGameTabButton()
+    {
+        ClosePrevTabs();
+    }
+
+    public void onUpgradeTabButton()
     {
         ClosePrevTabs();
         inUpgrade = true;
-        updgradePanel.SetActive(true);
+        updgradeTab.SetActive(true);
     }
 
     public void onStatsTabButton()
     {
         ClosePrevTabs();
         inStats = true;
-        statsPanel.SetActive(true);
+        statsTab.SetActive(true);
     }
 
     public void onSettingsTabButton()
     {
         ClosePrevTabs();
         inSettings = true;
-        settingsPanel.SetActive(true);
+        settingsTab.SetActive(true);
     }
 
 
     //gameMethods
     void UpdateScore()
     {
-        scoreText.text = Settings.scoreVal.ToString();
+        scoreText.text = Settings.Format(Settings.scoreVal);
 
         if (inUpgrade)
         {
@@ -70,17 +83,21 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     void ClosePrevTabs()
     {
+        Debug.Log(inUpgrade + " " +inStats + " " + inSettings);
         if (inUpgrade)
         {
-            updgradePanel.SetActive(false);
+            updgradeTab.SetActive(false);
+            inUpgrade = false;
         }
         else if (inStats)
         {
-            statsPanel.SetActive(false);
+            statsTab.SetActive(false);
+            inStats = false;
         }
         else
         {
-            settingsPanel.SetActive(false);
+            settingsTab.SetActive(false);
+            inSettings = false;
         }
     }
 
