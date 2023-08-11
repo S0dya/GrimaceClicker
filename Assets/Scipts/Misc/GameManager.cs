@@ -14,6 +14,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     [SerializeField] GameObject settingsTab;
 
     bool inUpgrade;
+    bool inPassiveUpgrade;
     bool inStats;
     bool inSettings;
 
@@ -33,6 +34,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         Debug.Log(Settings.upgradeMultiplayer);
         Settings.scoreVal += Settings.upgradeMultiplayer;
+        Settings.totalAmount += Settings.clickMultiplayer;
         UpdateScore();
     }
 
@@ -40,6 +42,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public void onMainButtonPress()
     {
         Settings.scoreVal += Settings.clickMultiplayer;
+        Settings.totalClicks++;
         UpdateScore();
     }
 
@@ -50,6 +53,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     public void onUpgradeTabButton()
     {
+        UpgradePanel.I.UpdateUpgrade();
         ClosePrevTabs();
         inUpgrade = true;
         updgradeTab.SetActive(true);
@@ -83,11 +87,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 
     void ClosePrevTabs()
     {
-        Debug.Log(inUpgrade + " " +inStats + " " + inSettings);
+        //Debug.Log(inUpgrade + " " +inStats + " " + inSettings);
         if (inUpgrade)
         {
             updgradeTab.SetActive(false);
             inUpgrade = false;
+            InfoPanel.I.ToggleInfo(false);
+            InfoPanelPassive.I.ToggleInfo(false);
         }
         else if (inStats)
         {

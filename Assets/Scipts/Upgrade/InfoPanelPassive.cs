@@ -4,11 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class InfoPanel : SingletonMonobehaviour<InfoPanel>
+public class InfoPanelPassive : SingletonMonobehaviour<InfoPanelPassive>
 {
-    [SerializeField] TextMeshProUGUI perSecondAmount;
-    [SerializeField] TextMeshProUGUI amount;
-    [SerializeField] TextMeshProUGUI madeSoFar;
+    [SerializeField] TextMeshProUGUI bonus;
 
     int curI;
 
@@ -29,7 +27,7 @@ public class InfoPanel : SingletonMonobehaviour<InfoPanel>
         Vector3 referencePosition = refer;
 
         // Calculate the new position for the panel to move
-        Vector3 newPosition = new Vector3(referencePosition.x, referencePosition.y + 200, referencePosition.z);
+        Vector3 newPosition = new Vector3(referencePosition.x, referencePosition.y, referencePosition.z);
 
         // Set the new position for the panel to move
         transform.position = newPosition;
@@ -43,9 +41,7 @@ public class InfoPanel : SingletonMonobehaviour<InfoPanel>
             return;
         }
         curI = i;
-        perSecondAmount.text = Settings.upgradeInfoPerSecond[i].ToString();
-        amount.text = Settings.upgradeInfoAmount[i].ToString();
-        madeSoFar.text = Settings.upgradeInfoSoFar[i].ToString();
+        bonus.text = Settings.upgradeInfoPerSecond[i].ToString();
 
         ToggleInfo(true);
     }

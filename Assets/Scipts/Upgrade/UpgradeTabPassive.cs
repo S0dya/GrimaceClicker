@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UpgradeTab : MonoBehaviour
+public class UpgradeTabPassive : MonoBehaviour
 {
+
     [SerializeField] GameObject lockedImage;
+    [SerializeField] GameObject boughtImage;
 
     [HideInInspector] public bool lockedPrice;
     [HideInInspector] public bool locked;
+    [HideInInspector] public bool bought;
 
     [SerializeField] TextMeshProUGUI priceText;
 
@@ -20,7 +23,8 @@ public class UpgradeTab : MonoBehaviour
 
     public void BuyUpgrade()
     {
-
+        bought = true;
+        boughtImage.SetActive(true);
     }
 
     public void LockPrice()
