@@ -20,7 +20,7 @@ public class UpgradeTab : MonoBehaviour
 
     public void BuyUpgrade()
     {
-
+        Settings.totalAmountOfActiveUpgrades++;
     }
 
     public void LockPrice()

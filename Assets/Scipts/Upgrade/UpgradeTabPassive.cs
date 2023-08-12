@@ -21,10 +21,12 @@ public class UpgradeTabPassive : MonoBehaviour
         locked = true;
     }
 
-    public void BuyUpgrade()
+    public void BuyUpgrade(int i)
     {
+        Settings.totalAmountOfPassiveUpgrades++;
         bought = true;
         boughtImage.SetActive(true);
+        Settings.passiveUpsUnlocked[i] = true;
     }
 
     public void LockPrice()

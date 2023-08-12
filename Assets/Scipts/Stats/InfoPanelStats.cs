@@ -4,16 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class InfoPanelPassive : SingletonMonobehaviour<InfoPanelPassive>
+public class InfoPanelStats : SingletonMonobehaviour<InfoPanelStats>
 {
+    [SerializeField] GameObject infoTab;
+    [SerializeField] GameObject highlight;
     [SerializeField] TextMeshProUGUI bonusType;
     [SerializeField] TextMeshProUGUI bonus;
+
 
     int curI;
 
     protected override void Awake()
     {
         base.Awake();
+
 
     }
 
@@ -33,7 +37,7 @@ public class InfoPanelPassive : SingletonMonobehaviour<InfoPanelPassive>
         bonusType.text = Settings.bonusText[type];
         bonus.text = Settings.passiveUpgradeBonus[type].ToString();
 
-        transform.position = pos;
+        highlight.transform.position = pos;
 
         ToggleInfo(true);
     }
@@ -44,6 +48,7 @@ public class InfoPanelPassive : SingletonMonobehaviour<InfoPanelPassive>
         {
             curI = -1;
         }
-        gameObject.SetActive(val);
+        infoTab.SetActive(val);
+        highlight.SetActive(val);
     }
 }

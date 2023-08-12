@@ -19,13 +19,19 @@ public static class Settings
     public static float[] upgradesMultiplayers = { 1, 1, 1, 1 };
 
     public static float[] passiveUpgradeCost = { 10, 50, 100, 200};
-    public static float[] passiveUpgradeBonus = { 2, 4, 6, 8, 10};
+    public static float[] passiveUpgradeBonus = { 2, 1.2f, 0.8f };
+    public static string[] bonusText = { "increases by ", "increases by", "decreases price by" };
 
     public static float[] passiveUpgradeInfoBonus = { 0.2f, 1f, 2, };
 
     //stats
     public static float totalAmount;
     public static float totalClicks;
+    public static float totalAmountOfActiveUpgrades;
+    public static float totalAmountOfPassiveUpgrades;
+
+    public static bool[] passiveUpsUnlocked = new bool[6]; //passiveUpgradeCost.Length
+
 
 
 

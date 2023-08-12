@@ -21,7 +21,7 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
     bool inActive;
     bool inPassive;
 
-    int curBonusIndex;
+    int curBonusType;
 
     protected override void Awake()
     {
@@ -53,19 +53,19 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
         Settings.upgradeCost[i] *= 1.15f;
         Settings.upgradeMultiplayer += Settings.upgradePerSecond[i] * Settings.upgradesMultiplayers[i];
         upgradeTabs[i].UpdatePrice(Settings.upgradeCost[i]);
+        upgradeTabs[i].BuyUpgrade();
     }
 
     public void OnInfoButtonActive(int i)
     {
-        infoPanel.Move(upgradeTabsObjs[i].transform.position);
-        infoPanel.SetInfo(i);
+        infoPanel.SetInfo(i, upgradeTabsObjs[i].transform.position);
     }
 
 
 
-    public void OnChangeBonus(int i)
+    public void OnChangeBonusType(int i)
     {
-        curBonusIndex = i;
+        curBonusType = i;
     }
     public void onBuyButtonPassive(int i)
     {
@@ -73,10 +73,15 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
             return;
 
         Settings.scoreVal -= Settings.passiveUpgradeCost[i];
-        Debug.Log(Settings.upgradePerSecond[i]);
-        Settings.upgradePerSecond[i] *= Settings.passiveUpgradeBonus[curBonusIndex];
-        Debug.Log(Settings.upgradePerSecond[i]);
-        passiveUpgradeTabs[i].BuyUpgrade();
+        if (curBonusType == 2)
+        {
+            Settings.passiveUpgradeCost[i] *= Settings.passiveUpgradeBonus[curBonusType];
+        }
+        else
+        {
+            Settings.upgradePerSecond[i] *= Settings.passiveUpgradeBonus[curBonusType];
+        }
+        passiveUpgradeTabs[i].BuyUpgrade(i);
     }
 
     public void onBuyButtonPassiveClick(int i)
@@ -85,16 +90,15 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
             return;
 
         Settings.scoreVal -= Settings.passiveUpgradeCost[i];
-        Settings.clickMultiplayer *= Settings.passiveUpgradeBonus[curBonusIndex];
-        passiveUpgradeTabs[i].BuyUpgrade();
+        Settings.clickMultiplayer *= Settings.passiveUpgradeBonus[curBonusType];
+        passiveUpgradeTabs[i].BuyUpgrade(i);
     }
 
-    
+
 
     public void OnInfoButtonPassive(int i)
     {
-        infoPanelPassive.Move(passiveUpgradeTabsObjs[i].transform.position);
-        infoPanelPassive.SetInfo(i);
+        infoPanelPassive.SetInfo(i, curBonusType, passiveUpgradeTabsObjs[i].transform.position);
     }
 
 

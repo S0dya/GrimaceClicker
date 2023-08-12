@@ -34,7 +34,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     {
         Debug.Log(Settings.upgradeMultiplayer);
         Settings.scoreVal += Settings.upgradeMultiplayer;
-        Settings.totalAmount += Settings.clickMultiplayer;
+        Settings.totalAmount += Settings.upgradeMultiplayer;
         UpdateScore();
     }
 
@@ -42,6 +42,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public void onMainButtonPress()
     {
         Settings.scoreVal += Settings.clickMultiplayer;
+        Settings.totalAmount += Settings.clickMultiplayer;
         Settings.totalClicks++;
         UpdateScore();
     }
@@ -62,6 +63,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     public void onStatsTabButton()
     {
         ClosePrevTabs();
+        StatsPanel.I.UpdatePassiveUps();
         inStats = true;
         statsTab.SetActive(true);
     }
@@ -83,6 +85,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             UpgradePanel.I.UpdateUpgrade();
         }
+        else if (inStats)
+        {
+            StatsPanel.I.UpdateStats();
+        }
     }
 
     void ClosePrevTabs()
@@ -99,6 +105,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             statsTab.SetActive(false);
             inStats = false;
+            StatsPanel.I.TogglePassiveTab(false);
         }
         else
         {
@@ -107,4 +114,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         }
     }
 
+
+    //gameManagerMethods
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            //im.sprite = sp;
+        }
+    }
 }

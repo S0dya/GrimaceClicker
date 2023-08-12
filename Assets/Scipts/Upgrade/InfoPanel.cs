@@ -23,19 +23,7 @@ public class InfoPanel : SingletonMonobehaviour<InfoPanel>
         curI = -1;
     }
 
-    public void Move(Vector3 refer)
-    {
-        // Get the current position of the reference panel
-        Vector3 referencePosition = refer;
-
-        // Calculate the new position for the panel to move
-        Vector3 newPosition = new Vector3(referencePosition.x, referencePosition.y + 200, referencePosition.z);
-
-        // Set the new position for the panel to move
-        transform.position = newPosition;
-    }
-
-    public void SetInfo(int i)
+    public void SetInfo(int i, Vector2 pos)
     {
         if (curI == i)
         {
@@ -46,6 +34,8 @@ public class InfoPanel : SingletonMonobehaviour<InfoPanel>
         perSecondAmount.text = Settings.upgradeInfoPerSecond[i].ToString();
         amount.text = Settings.upgradeInfoAmount[i].ToString();
         madeSoFar.text = Settings.upgradeInfoSoFar[i].ToString();
+
+        transform.position = pos;
 
         ToggleInfo(true);
     }
