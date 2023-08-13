@@ -51,8 +51,16 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
 
         Settings.scoreVal -= Settings.upgradeCost[i];
         Settings.upgradeCost[i] *= 1.15f;
-        Settings.upgradeMultiplayer += Settings.upgradePerSecond[i] * Settings.upgradesMultiplayers[i];
-        Settings.upgradeMultiplayerPerSec += Settings.upgradeInfoPerSecond[i] * Settings.upgradesMultiplayers[i];
+        float newUpMult = Settings.upgradePerSecond[i] * Settings.upgradesMultiplayers[i];
+        float newUpMultPerSec = Settings.upgradeInfoPerSecond[i] * Settings.upgradesMultiplayers[i];
+        if (Settings.isBonusOn)
+        {
+            newUpMult *= 2;
+            newUpMultPerSec *= 2;
+        }
+        Settings.upgradeMultiplayer += newUpMult;
+        Settings.upgradeMultiplayerPerSec += newUpMultPerSec;
+
         upgradeTabs[i].UpdatePrice(Settings.upgradeCost[i]);
         upgradeTabs[i].BuyUpgrade();
     }

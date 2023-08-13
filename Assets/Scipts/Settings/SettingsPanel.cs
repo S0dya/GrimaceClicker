@@ -16,7 +16,6 @@ public class SettingsPanel : SingletonMonobehaviour<SettingsPanel>
 
         Toggle(Settings.isMusicOn, 0);
         Toggle(Settings.isParticlesOn, 1);
-        Toggle(Settings.isParticlesOnClickOn, 2);
     }
 
     //buttons
@@ -28,11 +27,6 @@ public class SettingsPanel : SingletonMonobehaviour<SettingsPanel>
     public void OnParticlesButton()
     {
         Toggle(!Settings.isParticlesOn, 1);
-    }
-
-    public void OnParticlesOnClickButton()
-    {
-        Toggle(!Settings.isParticlesOnClickOn, 2);
     }
 
     public void OnNewGameButton()
@@ -51,9 +45,6 @@ public class SettingsPanel : SingletonMonobehaviour<SettingsPanel>
                 break;
             case 1:
                 Settings.isParticlesOn = val;//maybeDelLater
-                break;
-            case 2:
-                Settings.isParticlesOnClickOn = val;//maybeDelLater
                 break;
             default:
                 Debug.Log("setPan");

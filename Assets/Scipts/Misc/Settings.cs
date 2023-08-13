@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class Settings
 {
+    //game
     public static float scoreVal;
     public static float clickMultiplayer = 1;
-    public static float upgradeMultiplayer = 0;
-    public static float upgradeMultiplayerPerSec = 0;
+    public static float upgradeMultiplayer;
+    public static float upgradeMultiplayerPerSec;
+
+    public static bool isBonusOn;
+    public static int nextBonus;
 
     //Upgrades/Info
     public static float[] upgradeCost= { 10, 100, 2, };
     public static float[] upgradePerSecond = { 0.013f, 1f, 2, };
 
     public static float[] upgradeInfoPerSecond = { 0.2f, 1f, 2, };
-    public static float[] upgradeInfoAmount = { 0.2f, 1f, 2, };
+    public static float[] upgradeInfoAmount = { 0, 0, 0, };
     public static float[] upgradeInfoSoFar = { 0.2f, 1f, 2, };
 
     public static float[] upgradesMultiplayers = { 1, 1, 1, 1 };
@@ -27,7 +32,7 @@ public static class Settings
 
     //stats
     public static float totalAmount;
-    public static float totalClicks;
+    public static int totalClicks;
     public static float totalAmountOfActiveUpgrades;
     public static float totalAmountOfPassiveUpgrades;
     public static float totalAmountOfWatchedAdx10;
@@ -38,9 +43,14 @@ public static class Settings
     //settings
     public static bool isMusicOn;
     public static bool isParticlesOn;
-    public static bool isParticlesOnClickOn;
 
 
+
+    //save
+    public static string GameScene = SceneManager.GetActiveScene().name;
+
+
+    //format
     const float thousand = 1e3f;
     const float million = 1e6f;
     const float billion = 1e9f;

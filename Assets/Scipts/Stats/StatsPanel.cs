@@ -77,8 +77,15 @@ public class StatsPanel : SingletonMonobehaviour<StatsPanel>
 
     public void TogglePassiveTab(bool val)
     {
-        passiveUpsTab.SetActive(val);
-        InfoPanelStats.I.ToggleInfo(false);
-
+        if (val)
+        {
+            passiveUpsTab.SetActive(val);
+            InfoPanelStats.I.ToggleInfo(false);
+        }
+        else
+        {
+            InfoPanelStats.I.ToggleInfo(false);
+            passiveUpsTab.SetActive(val);
+        }
     }
 }
