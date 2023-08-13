@@ -21,6 +21,7 @@ public class UpgradeTab : MonoBehaviour
     public void BuyUpgrade()
     {
         Settings.totalAmountOfActiveUpgrades++;
+        GameManager.I.UpdateMultiplayer();
     }
 
     public void LockPrice()

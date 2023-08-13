@@ -7,6 +7,7 @@ public static class Settings
     public static float scoreVal;
     public static float clickMultiplayer = 1;
     public static float upgradeMultiplayer = 0;
+    public static float upgradeMultiplayerPerSec = 0;
 
     //Upgrades/Info
     public static float[] upgradeCost= { 10, 100, 2, };
@@ -29,21 +30,26 @@ public static class Settings
     public static float totalClicks;
     public static float totalAmountOfActiveUpgrades;
     public static float totalAmountOfPassiveUpgrades;
+    public static float totalAmountOfWatchedAdx10;
+    public static float totalAmountOfWatchedAdx2;
 
     public static bool[] passiveUpsUnlocked = new bool[6]; //passiveUpgradeCost.Length
 
+    //settings
+    public static bool isMusicOn;
+    public static bool isParticlesOn;
+    public static bool isParticlesOnClickOn;
 
 
+    const float thousand = 1e3f;
+    const float million = 1e6f;
+    const float billion = 1e9f;
+    const float trillion = 1e12f;
+    const float quadrillion = 1e15f;
+    const float quintillion = 1e18f;
 
     public static string Format(float number)
     {
-        const float thousand = 1e3f;
-        const float million = 1e6f;
-        const float billion = 1e9f;
-        const float trillion = 1e12f;
-        const float quadrillion = 1e15f;
-        const float quintillion = 1e18f;
-
         if (float.IsPositiveInfinity(number))
             return "MAXIMUM VALUE";
 
@@ -71,6 +77,41 @@ public static class Settings
                 break;
             default:
                 formattedNumber = number.ToString("F0");
+                break;
+        }
+
+        return formattedNumber;
+    }
+
+    public static string FormatForMultiplayer(float number)
+    {
+        if (float.IsPositiveInfinity(number))
+            return "MAXIMUM VALUE";
+
+        string formattedNumber;
+
+        switch (number)
+        {
+            case var _ when number >= quintillion:
+                formattedNumber = (number / quintillion).ToString("F1") + "QT";
+                break;
+            case var _ when number >= quadrillion:
+                formattedNumber = (number / quadrillion).ToString("F1") + "QD";
+                break;
+            case var _ when number >= trillion:
+                formattedNumber = (number / trillion).ToString("F1") + "T";
+                break;
+            case var _ when number >= billion:
+                formattedNumber = (number / billion).ToString("F1") + "B";
+                break;
+            case var _ when number >= million:
+                formattedNumber = (number / million).ToString("F1") + "M";
+                break;
+            case var _ when number >= thousand:
+                formattedNumber = (number / thousand).ToString("F1") + "K";
+                break;
+            default:
+                formattedNumber = number.ToString("F1");
                 break;
         }
 

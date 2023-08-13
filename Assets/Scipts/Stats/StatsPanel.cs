@@ -28,12 +28,18 @@ public class StatsPanel : SingletonMonobehaviour<StatsPanel>
     public void OnAdButtonX10Score()
     {
         Debug.Log("playAd");
-        Settings.scoreVal *= 10f;
+
+        float cur = Settings.scoreVal * 10f;
+        Settings.scoreVal += cur;
+        Settings.totalAmount += cur;
     }
     public void OnAdButtonX2Upgrades()
     {
         Debug.Log("playAd");
+
         Settings.upgradeMultiplayer *= 2;
+        Settings.upgradeMultiplayerPerSec *= 2;
+        GameManager.I.UpdateMultiplayer();
     }
 
     public void OnPassiveUpgradesShowButton()

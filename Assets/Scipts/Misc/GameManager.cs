@@ -8,10 +8,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>
 {
 
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI multiplayerText;
 
     [SerializeField] GameObject updgradeTab;
     [SerializeField] GameObject statsTab;
     [SerializeField] GameObject settingsTab;
+
+    [SerializeField] GameObject newGameTab;
+    
 
     bool inUpgrade;
     bool inPassiveUpgrade;
@@ -27,7 +31,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     void Start()
     {
         Settings.scoreVal = 0;
-        Time.timeScale = 0.25f;
+        ToggleNewGame(false);
     }
 
     void FixedUpdate()
@@ -39,14 +43,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>
     }
 
     //buttons
-    public void onMainButtonPress()
-    {
-        Settings.scoreVal += Settings.clickMultiplayer;
-        Settings.totalAmount += Settings.clickMultiplayer;
-        Settings.totalClicks++;
-        UpdateScore();
-    }
-
     public void onGameTabButton()
     {
         ClosePrevTabs();
@@ -75,9 +71,19 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         settingsTab.SetActive(true);
     }
 
+    //newGameButtons
+    public void OnNewGameConfirmButton()
+    {
+        Debug.Log("load scene");
+    }
+    public void OnNewGameCloseButton()
+    {
+        ToggleNewGame(false);
+    }
+
 
     //gameMethods
-    void UpdateScore()
+    public void UpdateScore()
     {
         scoreText.text = Settings.Format(Settings.scoreVal);
 
@@ -89,6 +95,10 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             StatsPanel.I.UpdateStats();
         }
+    }
+    public void UpdateMultiplayer()
+    {
+        multiplayerText.text = Settings.FormatForMultiplayer(Settings.upgradeMultiplayerPerSec) + "/s";
     }
 
     void ClosePrevTabs()
@@ -111,6 +121,20 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         {
             settingsTab.SetActive(false);
             inSettings = false;
+        }
+    }
+
+    //newGameMethods
+    public void ToggleNewGame(bool val)
+    {
+        newGameTab.SetActive(val);
+        if (val)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 0.25f;
         }
     }
 
