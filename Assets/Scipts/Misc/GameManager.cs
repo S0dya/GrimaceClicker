@@ -36,6 +36,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
     protected override void Awake()
     {
         base.Awake();
+        GameObjectSave = new GameObjectSave();
 
         bonusCoctailTextTimer.color = bonusColor;
         bonusCoctailTextBonusX2.color = bonusColor;
@@ -43,9 +44,26 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
 
     void Start()
     {
-        Settings.scoreVal = 0;
+        SaveManager.I.LoadDataFromFile();
+
+        if (Settings.upgradeMultiplayerPerSec != 0)
+        {
+            UpdateMultiplayer();
+        }
         ToggleNewGame(false);
         //ToggleBonus(true);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            SaveManager.I.SaveDataToFile();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SaveManager.I.LoadDataFromFile();
+        }
     }
 
     void FixedUpdate()
@@ -213,19 +231,26 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         }
     }
 
-
-
     //gameManagerMethods
-
-    private void OnApplicationPause(bool pauseStatus)
+    void OnApplicationPause(bool pauseStatus)
     {
         if (pauseStatus)
         {
-            //im.sprite = sp;
+            SaveManager.I.SaveDataToFile();
         }
     }
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+        {
+            SaveManager.I.SaveDataToFile();
+        }
+    }
+    void OnApplicationQuit()
+    {
+        SaveManager.I.SaveDataToFile();
+    }
 
-    
     //save
     void OnEnable()
     {

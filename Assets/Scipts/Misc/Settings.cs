@@ -47,7 +47,7 @@ public static class Settings
 
 
     //save
-    public static string GameScene = SceneManager.GetActiveScene().name;
+    public static string GameScene = "MainScene";
 
 
     //format

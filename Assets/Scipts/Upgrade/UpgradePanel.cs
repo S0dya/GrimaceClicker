@@ -10,11 +10,13 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
     [SerializeField] GameObject passiveUpgradeTab;
     [SerializeField] InfoPanel infoPanel;
     [SerializeField] InfoPanelPassive infoPanelPassive;
-    [SerializeField] GameObject[] upgradeTabsObjs;
-    [SerializeField] UpgradeTab[] upgradeTabs;
+    [SerializeField] GameObject[] upgradeBarObjs;
+    [SerializeField] UpgradeTab[] upgradeBars;
+    [SerializeField] TextMeshProUGUI[] upgradeAmountTexts;
 
     [SerializeField] GameObject[] passiveUpgradeTabsObjs;
     [SerializeField] UpgradeTabPassive[] passiveUpgradeTabs;
+
 
     int[] prices;
 
@@ -33,13 +35,20 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
     {
         inActive = true;
 
-        for (int i = 0; i < upgradeTabs.Length; i++)
+        for (int i = 0; i < upgradeBars.Length; i++)
         {
-            upgradeTabs[i].UpdatePrice(Settings.upgradeCost[i]);
+            upgradeBars[i].UpdatePrice(Settings.upgradeCost[i]);
         }
         for (int i = 0; i < passiveUpgradeTabs.Length; i++)
         {
             passiveUpgradeTabs[i].UpdatePrice(Settings.passiveUpgradeCost[i]);
+        }
+        for (int i = 0; i < passiveUpgradeTabs.Length; i++)
+        {
+            if (Settings.upgradeInfoAmount[i] != 0)
+            {
+                UpdateUpgradeAmount(i);
+            }
         }
     }
 
@@ -60,14 +69,16 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
         }
         Settings.upgradeMultiplayer += newUpMult;
         Settings.upgradeMultiplayerPerSec += newUpMultPerSec;
+        Settings.upgradeInfoAmount[i]++;
+        UpdateUpgradeAmount(i);
 
-        upgradeTabs[i].UpdatePrice(Settings.upgradeCost[i]);
-        upgradeTabs[i].BuyUpgrade();
+        upgradeBars[i].UpdatePrice(Settings.upgradeCost[i]);
+        upgradeBars[i].BuyUpgrade();
     }
 
     public void OnInfoButtonActive(int i)
     {
-        infoPanel.SetInfo(i, upgradeTabsObjs[i].transform.position);
+        infoPanel.SetInfo(i, upgradeBarObjs[i].transform.position);
     }
 
 
@@ -144,19 +155,19 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
     }
     public void CheckActive()
     {
-        for (int i = 0; i < upgradeTabs.Length; i++)
+        for (int i = 0; i < upgradeBars.Length; i++)
         {
-            if (upgradeTabs[i].locked && Settings.scoreVal >= Settings.upgradeCost[i] / 2)
+            if (upgradeBars[i].locked && Settings.scoreVal >= Settings.upgradeCost[i] / 2)
             {
-                upgradeTabs[i].Unlock();
+                upgradeBars[i].Unlock();
             }
             else if (Settings.scoreVal >= Settings.upgradeCost[i])
             {
-                upgradeTabs[i].UnlockPrice();
+                upgradeBars[i].UnlockPrice();
             }
             else
             {
-                upgradeTabs[i].LockPrice();
+                upgradeBars[i].LockPrice();
             }
         }
     }
@@ -183,5 +194,11 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
             }
         }
     }
+
+    void UpdateUpgradeAmount(int i)
+    {
+        upgradeAmountTexts[i].text = Settings.upgradeInfoAmount[i].ToString();
+    }
+
 
 }

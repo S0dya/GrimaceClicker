@@ -98,7 +98,7 @@ public class BonusButton : SingletonMonobehaviour<BonusButton>, IPointerDownHand
 
     IEnumerator BonusAppearCor()
     {
-        yield return new WaitForSeconds(Random.Range(3f, 5f));
+        yield return new WaitForSeconds(Random.Range(1f, 3f));
 
         StopBlinkingBonus();
     }
