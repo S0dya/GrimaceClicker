@@ -13,7 +13,7 @@ public class UpgradeTab : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI priceText;
 
-    void Start()
+    void Awake()
     {
         locked = true;
     }

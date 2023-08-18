@@ -38,16 +38,31 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
         for (int i = 0; i < upgradeBars.Length; i++)
         {
             upgradeBars[i].UpdatePrice(Settings.upgradeCost[i]);
-        }
-        for (int i = 0; i < passiveUpgradeTabs.Length; i++)
-        {
-            passiveUpgradeTabs[i].UpdatePrice(Settings.passiveUpgradeCost[i]);
-        }
-        for (int i = 0; i < passiveUpgradeTabs.Length; i++)
-        {
+
+            if (Settings.openedActiveUps[i])
+            {
+                upgradeBars[i].Unlock();
+            }
+            
             if (Settings.upgradeInfoAmount[i] != 0)
             {
                 UpdateUpgradeAmount(i);
+            }
+        }
+
+        for (int i = 0; i < passiveUpgradeTabs.Length; i++)
+        {
+            passiveUpgradeTabs[i].UpdatePrice(Settings.passiveUpgradeCost[i]);
+            
+            if (Settings.openedPassiveUps[i])
+            {
+                passiveUpgradeTabs[i].Unlock();
+            }
+
+            if (Settings.boughtPassiveUp[i])
+            {
+                Debug.Log("DasdT");
+                passiveUpgradeTabs[i].SetBought();
             }
         }
     }
@@ -91,6 +106,7 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
     {
         if (Settings.scoreVal < Settings.passiveUpgradeCost[i])
             return;
+        Settings.boughtPassiveUp[i] = true;
 
         Settings.scoreVal -= Settings.passiveUpgradeCost[i];
         if (curBonusType == 2)
@@ -108,6 +124,7 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
     {
         if (Settings.scoreVal < Settings.passiveUpgradeCost[i])
             return;
+        Settings.boughtPassiveUp[i] = true;
 
         Settings.scoreVal -= Settings.passiveUpgradeCost[i];
         Settings.clickMultiplayer *= Settings.passiveUpgradeBonus[curBonusType];
@@ -160,6 +177,7 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
             if (upgradeBars[i].locked && Settings.scoreVal >= Settings.upgradeCost[i] / 2)
             {
                 upgradeBars[i].Unlock();
+                Settings.openedActiveUps[i] = true;
             }
             else if (Settings.scoreVal >= Settings.upgradeCost[i])
             {
@@ -183,6 +201,7 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
             if (passiveUpgradeTabs[i].locked && Settings.scoreVal >= Settings.passiveUpgradeCost[i] / 2)
             {
                 passiveUpgradeTabs[i].Unlock();
+                Settings.openedPassiveUps[i] = true;
             }
             else if (Settings.scoreVal >= Settings.passiveUpgradeCost[i])
             {

@@ -48,6 +48,9 @@ public static class Settings
 
     //save
     public static string GameScene = "MainScene";
+    public static bool[] openedActiveUps = new bool[6];//changelater
+    public static bool[] openedPassiveUps = new bool[6];//changelater
+    public static bool[] boughtPassiveUp = new bool[6];//changelater
 
 
     //format

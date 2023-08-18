@@ -16,17 +16,23 @@ public class UpgradeTabPassive : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI priceText;
 
-    void Start()
+    void Awake()
     {
         locked = true;
+
     }
 
     public void BuyUpgrade(int i)
     {
         Settings.totalAmountOfPassiveUpgrades++;
+        SetBought();
+        Settings.passiveUpsUnlocked[i] = true;
+    }
+
+    public void SetBought()
+    {
         bought = true;
         boughtImage.SetActive(true);
-        Settings.passiveUpsUnlocked[i] = true;
     }
 
     public void LockPrice()

@@ -44,6 +44,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
 
     void Start()
     {
+        //SaveManager.I.SaveDataToFile();
         SaveManager.I.LoadDataFromFile();
 
         if (Settings.upgradeMultiplayerPerSec != 0)
@@ -307,6 +308,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         sceneSave.floatDictionary.Add("totalAmountOfWatchedAdx2", Settings.totalAmountOfWatchedAdx2);
 
         sceneSave.boolArrayDictionary.Add("passiveUpsUnlocked", Settings.passiveUpsUnlocked);
+        sceneSave.boolArrayDictionary.Add("openedActiveUps", Settings.openedActiveUps);
+        sceneSave.boolArrayDictionary.Add("openedPassiveUps", Settings.openedPassiveUps);
+        sceneSave.boolArrayDictionary.Add("boughtPassiveUp", Settings.boughtPassiveUp);
 
         //settings
         sceneSave.boolDictionary.Add("isMusicOn", Settings.isMusicOn);
@@ -398,6 +402,19 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
                 {
                     Settings.passiveUpsUnlocked = passiveUpsUnlocked;
                 }
+                if (sceneSave.boolArrayDictionary.TryGetValue("openedActiveUps", out bool[] openedActiveUps))
+                {
+                    Settings.openedActiveUps = openedActiveUps;
+                }
+                if (sceneSave.boolArrayDictionary.TryGetValue("openedPassiveUps", out bool[] openedPassiveUps))
+                {
+                    Settings.openedPassiveUps = openedPassiveUps;
+                }
+                if (sceneSave.boolArrayDictionary.TryGetValue("boughtPassiveUp", out bool[] boughtPassiveUp))
+                {
+                    Settings.boughtPassiveUp = boughtPassiveUp;
+                }
+
             }
             if (sceneSave.boolDictionary != null)
             {
