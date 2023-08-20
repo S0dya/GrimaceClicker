@@ -48,6 +48,12 @@ public class UpgradeTab : MonoBehaviour
         lockedImage.SetActive(false);
     }
 
+    public void Lock()
+    {
+        locked = true;
+        lockedImage.SetActive(true);
+    }
+
     public void UpdatePrice(float val)
     {
         priceText.text = Settings.Format(val);

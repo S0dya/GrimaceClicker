@@ -25,10 +25,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
 
     Coroutine bonusCor;
 
+    bool inGame;
     bool inUpgrade;
     bool inPassiveUpgrade;
     bool inStats;
     bool inSettings;
+    bool inNewGame;
 
     GameObjectSave _gameObjectSave;
     public GameObjectSave GameObjectSave { get { return _gameObjectSave; } set { _gameObjectSave = value; } }
@@ -53,6 +55,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         }
         ToggleNewGame(false);
         //ToggleBonus(true);
+        inGame = true;
     }
 
     void Update()
@@ -65,6 +68,28 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         {
             SaveManager.I.LoadDataFromFile();
         }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Settings.scoreVal += 1000;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (inNewGame)
+            {
+                ToggleNewGame(false);
+            }
+            else if (inGame)
+            {
+                Application.Quit();
+            }
+            else
+            {
+                ClosePrevTabs();
+            }
+        }
+
+        //Debug.Log(inGame + " " + inUpgrade + " " + inStats + " " + inSettings);
     }
 
     void FixedUpdate()
@@ -79,6 +104,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
     public void onGameTabButton()
     {
         ClosePrevTabs();
+        inGame = true;
     }
 
     public void onUpgradeTabButton()
@@ -104,10 +130,25 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         settingsTab.SetActive(true);
     }
 
+    public void OnButtonPress()
+    {
+        AudioManager.I.PlayOneShot("ButtonPress");
+    }
+    public void OnButtonPressDownBar()
+    {
+        AudioManager.I.PlayOneShot("ButtonPressDownBar");
+    }
+
     //newGameButtons
     public void OnNewGameConfirmButton()
     {
-        Debug.Log("load scene");
+        Settings.Clear();
+        UpgradePanel.I.CLear();
+        SettingsPanel.I.Start();
+        SaveManager.I.SaveDataToFile();
+        multiplayerText.text = "";
+
+        ToggleNewGame(false);
     }
     public void OnNewGameCloseButton()
     {
@@ -136,7 +177,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
 
     void ClosePrevTabs()
     {
-        //Debug.Log(inUpgrade + " " +inStats + " " + inSettings);
         if (inUpgrade)
         {
             updgradeTab.SetActive(false);
@@ -150,11 +190,12 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
             inStats = false;
             StatsPanel.I.TogglePassiveTab(false);
         }
-        else
+        else if (inSettings)
         {
             settingsTab.SetActive(false);
             inSettings = false;
         }
+        inGame = false;
     }
 
     public void ToggleBonus(bool val)
@@ -218,10 +259,17 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         bonusCanvasGroup.alpha = 1f;
     }
 
+    void SetSettings()
+    {
+
+    }
+
+
     //newGameMethods
     public void ToggleNewGame(bool val)
     {
         newGameTab.SetActive(val);
+        inNewGame = val;
         if (val)
         {
             Time.timeScale = 0;

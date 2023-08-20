@@ -59,6 +59,13 @@ public class UpgradeTabPassive : MonoBehaviour
         lockedImage.SetActive(false);
     }
 
+    public void Lock()
+    {
+        boughtImage.SetActive(false);
+        locked = true;
+        lockedImage.SetActive(true);
+    }
+
     public void UpdatePrice(float val)
     {
         priceText.text = Settings.Format(val);

@@ -426,8 +426,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../../MusicFMOD/Projects/PinkThing/KhrushewkaAudio - Copy/KhrushewkaAudio.fspro
-  sourceBankPath: ../../../MusicFMOD/Projects/PinkThing/KhrushewkaAudio - Copy/Build
+  sourceProjectPath: ../../../MusicFMOD/Projects/PinkThing/GrimaceClicker/GrimaceClicker.fspro
+  sourceBankPath: ../../../MusicFMOD/Projects/PinkThing/GrimaceClicker/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1

@@ -15,7 +15,7 @@ public static class Settings
     public static int nextBonus;
 
     //Upgrades/Info
-    public static float[] upgradeCost= { 10, 100, 2, };
+    public static float[] upgradeCost = { 10, 100, 2, };
     public static float[] upgradePerSecond = { 0.013f, 1f, 2, };
 
     public static float[] upgradeInfoPerSecond = { 0.2f, 1f, 2, };
@@ -41,8 +41,8 @@ public static class Settings
     public static bool[] passiveUpsUnlocked = new bool[6]; //passiveUpgradeCost.Length
 
     //settings
-    public static bool isMusicOn;
-    public static bool isParticlesOn;
+    public static bool isMusicOn = true;
+    public static bool isParticlesOn = true;
 
 
 
@@ -129,5 +129,34 @@ public static class Settings
         }
 
         return formattedNumber;
+    }
+
+    public static void Clear()
+    {
+        scoreVal = 0;
+        clickMultiplayer = 1;
+        upgradeMultiplayer = 0;
+        upgradeMultiplayerPerSec = 0;
+
+        upgradeCost = new float[] { 10, 100, 2, };
+        upgradePerSecond = new float[] { 0.013f, 1f, 2, };
+        upgradeInfoAmount = new float[] { 0, 0, 0, };
+        upgradeInfoSoFar = new float[] { 0.2f, 1f, 2, };
+        upgradesMultiplayers = new float[] { 1, 1, 1, 1 };
+
+        totalAmount = 0;
+        totalClicks = 0;
+        totalAmountOfActiveUpgrades = 0;
+        totalAmountOfPassiveUpgrades = 0;
+        totalAmountOfWatchedAdx10 = 0;
+        totalAmountOfWatchedAdx2 = 0;
+
+        passiveUpsUnlocked = new bool[6]; //passiveUpgradeCost.Length
+        openedActiveUps = new bool[6];//changelater
+        openedPassiveUps = new bool[6];//changelater
+        boughtPassiveUp = new bool[6];//changelater
+
+        isMusicOn = true;
+        isParticlesOn = true;
     }
 }

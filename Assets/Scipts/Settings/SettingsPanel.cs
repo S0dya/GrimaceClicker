@@ -14,6 +14,11 @@ public class SettingsPanel : SingletonMonobehaviour<SettingsPanel>
     {
         base.Awake();
 
+        
+    }
+
+    public void Start()
+    {
         Toggle(Settings.isMusicOn, 0);
         Toggle(Settings.isParticlesOn, 1);
     }
@@ -37,11 +42,11 @@ public class SettingsPanel : SingletonMonobehaviour<SettingsPanel>
     //methods
     public void Toggle(bool val, int i)
     {
-        Debug.Log(i);
         switch(i)
         {
             case 0:
                 Settings.isMusicOn = val;//maybeDelLater
+                AudioManager.I.ToggleSFX(val);
                 break;
             case 1:
                 Settings.isParticlesOn = val;//maybeDelLater

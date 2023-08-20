@@ -27,7 +27,7 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
 
     void Start()
     {
-        EventInstancesDict.Add("Music", CreateInstance(FMODManager.I.Music));
+        //EventInstancesDict.Add("Music", CreateInstance(FMODManager.I.Music));
         EventInstancesDict.Add("Ambience", CreateInstance(FMODManager.I.Ambience));
 
         EventInstancesDict.Add("ButtonPress", CreateInstance(FMODManager.I.ButtonPress));
@@ -77,11 +77,11 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     {
         if (val)
         {
-            RuntimeManager.GetBus("bus:/SFX").setVolume(1);
+            RuntimeManager.GetBus("bus:/").setVolume(1);
         }
         else
         {
-            RuntimeManager.GetBus("bus:/SFX").setVolume(0);
+            RuntimeManager.GetBus("bus:/").setVolume(0);
         }
     }
 }

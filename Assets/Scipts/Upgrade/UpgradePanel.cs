@@ -44,10 +44,8 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
                 upgradeBars[i].Unlock();
             }
             
-            if (Settings.upgradeInfoAmount[i] != 0)
-            {
-                UpdateUpgradeAmount(i);
-            }
+            UpdateUpgradeAmount(i);
+
         }
 
         for (int i = 0; i < passiveUpgradeTabs.Length; i++)
@@ -61,7 +59,6 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
 
             if (Settings.boughtPassiveUp[i])
             {
-                Debug.Log("DasdT");
                 passiveUpgradeTabs[i].SetBought();
             }
         }
@@ -216,8 +213,32 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
 
     void UpdateUpgradeAmount(int i)
     {
-        upgradeAmountTexts[i].text = Settings.upgradeInfoAmount[i].ToString();
+        if (Settings.upgradeInfoAmount[i] != 0)
+        {
+            upgradeAmountTexts[i].text = Settings.upgradeInfoAmount[i].ToString();
+        }
+        else
+        {
+            upgradeAmountTexts[i].text = "";
+        }
     }
 
+    public void CLear()
+    {
+        OnActiveUpgradePanel();
 
+        for (int i = 0; i < upgradeBars.Length; i++)
+        {
+            upgradeBars[i].UpdatePrice(Settings.upgradeCost[i]);
+            upgradeBars[i].Lock();
+
+            UpdateUpgradeAmount(i);
+        }
+
+        for (int i = 0; i < passiveUpgradeTabs.Length; i++)
+        {
+            passiveUpgradeTabs[i].UpdatePrice(Settings.upgradeCost[i]);
+            passiveUpgradeTabs[i].Lock();
+        }
+    }
 }
