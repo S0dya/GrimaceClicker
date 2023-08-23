@@ -62,6 +62,8 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
                 passiveUpgradeTabs[i].SetBought();
             }
         }
+
+        UpdateUpgrade();
     }
 
     //buttons

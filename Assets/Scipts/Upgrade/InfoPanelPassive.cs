@@ -40,6 +40,7 @@ public class InfoPanelPassive : SingletonMonobehaviour<InfoPanelPassive>
 
     public void ToggleInfo(bool val)
     {
+        Debug.Log(val);
         if (!val)
         {
             curI = -1;

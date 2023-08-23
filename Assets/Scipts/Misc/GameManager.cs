@@ -94,7 +94,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
 
     void FixedUpdate()
     {
-        Debug.Log(Settings.upgradeMultiplayer);
         Settings.scoreVal += Settings.upgradeMultiplayer;
         Settings.totalAmount += Settings.upgradeMultiplayer;
         UpdateScore();

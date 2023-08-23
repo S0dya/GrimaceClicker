@@ -24,6 +24,12 @@ public class StatsPanel : SingletonMonobehaviour<StatsPanel>
 
     }
 
+    void Start()
+    {
+
+        UpdateStats();
+    }
+
     //buttons
     public void OnAdButtonX10Score()
     {
