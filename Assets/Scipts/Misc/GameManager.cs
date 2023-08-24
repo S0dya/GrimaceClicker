@@ -40,13 +40,14 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         base.Awake();
         GameObjectSave = new GameObjectSave();
 
+
         bonusCoctailTextTimer.color = bonusColor;
         bonusCoctailTextBonusX2.color = bonusColor;
     }
 
     void Start()
     {
-        //SaveManager.I.SaveDataToFile();
+        SaveManager.I.SaveDataToFile();
         SaveManager.I.LoadDataFromFile();
 
         if (Settings.upgradeMultiplayerPerSec != 0)

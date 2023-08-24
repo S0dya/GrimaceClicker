@@ -15,14 +15,14 @@ public static class Settings
     public static int nextBonus;
 
     //Upgrades/Info
-    public static float[] upgradeCost = { 10, 100, 2, };
-    public static float[] upgradePerSecond = { 0.013f, 1f, 2, };
+    public static float[] upgradeCost = { 15f, 100f, 500f, 2000f, 7500f, 50000f, 1000000f, 5000000f, 50000000f, 1000000000f, 50000000000f, 1000000000000f, 100000000000000f};
 
-    public static float[] upgradeInfoPerSecond = { 0.2f, 1f, 2, };
-    public static float[] upgradeInfoAmount = { 0, 0, 0, };
-    public static float[] upgradeInfoSoFar = { 0.2f, 1f, 2, };
+    public static float[] upgradePerSecond = { 0.2f / 15f, 1f / 15f, 8f / 15f, 47f / 15f, 260f / 15f, 1400f / 15f, 7800f / 15f, 44000f / 15f, 260000f / 15f, 1600000f / 15f, 10000000f / 15f, 65000000f / 15f, 430000000f / 15f };
+    public static float[] upgradeInfoPerSecond = { 0.2f, 1f, 8f, 47f, 260f, 1400f, 7800f, 44000f, 260000f, 1600000f, 10000000f, 65000000f, 430000000f};
+    public static float[] upgradeInfoAmount = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public static float[] upgradeInfoSoFar = { 0.2f, 1f, 8f, 47f, 260f, 1400f, 7800f, 44000f, 260000f, 1600000f, 10000000f, 65000000f, 430000000f };
 
-    public static float[] upgradesMultiplayers = { 1, 1, 1, 1 };
+    public static float[] upgradesMultiplayers = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
     public static float[] passiveUpgradeCost = { 10, 50, 100, 200};
     public static float[] passiveUpgradeBonus = { 2, 1.2f, 0.8f };
@@ -48,7 +48,7 @@ public static class Settings
 
     //save
     public static string GameScene = "MainScene";
-    public static bool[] openedActiveUps = new bool[6];//changelater
+    public static bool[] openedActiveUps = new bool[13];//changelater
     public static bool[] openedPassiveUps = new bool[6];//changelater
     public static bool[] boughtPassiveUp = new bool[6];//changelater
 

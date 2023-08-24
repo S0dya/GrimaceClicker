@@ -33,19 +33,17 @@ public class StatsPanel : SingletonMonobehaviour<StatsPanel>
     //buttons
     public void OnAdButtonX10Score()
     {
-        Debug.Log("playAd");
+        AdsManager.I.x10 = true;
+        AdsManager.I.x2 = false;
 
-        float cur = Settings.scoreVal * 10f;
-        Settings.scoreVal += cur;
-        Settings.totalAmount += cur;
+        AdsManager.I.ShowRewardedAd();
     }
     public void OnAdButtonX2Upgrades()
     {
-        Debug.Log("playAd");
+        AdsManager.I.x10 = false;
+        AdsManager.I.x2 = true;
 
-        Settings.upgradeMultiplayer *= 2;
-        Settings.upgradeMultiplayerPerSec *= 2;
-        GameManager.I.UpdateMultiplayer();
+        AdsManager.I.ShowRewardedAd();
     }
 
     public void OnPassiveUpgradesShowButton()
@@ -94,4 +92,20 @@ public class StatsPanel : SingletonMonobehaviour<StatsPanel>
             passiveUpsTab.SetActive(val);
         }
     }
+
+    //ads
+    public void RewardPlayerX10()
+    {
+        float cur = Settings.scoreVal * 10f;
+        Settings.scoreVal = cur;
+        Settings.totalAmount += cur;
+    }
+
+    public void RewardPlayerX2()
+    {
+        Settings.upgradeMultiplayer *= 2;
+        Settings.upgradeMultiplayerPerSec *= 2;
+        GameManager.I.UpdateMultiplayer();
+    }
+
 }
