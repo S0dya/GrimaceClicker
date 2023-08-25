@@ -15,7 +15,7 @@ public static class Settings
     public static int nextBonus;
 
     //Upgrades/Info
-    public static float[] upgradeCost = { 15f, 100f, 500f, 2000f, 7500f, 50000f, 1000000f, 5000000f, 50000000f, 1000000000f, 50000000000f, 1000000000000f, 100000000000000f};
+    public static float[] upgradeCost = { 15f, 100f, 500f, 2000f, 7500f, 50000f, 1000000f, 5000000f, 50000000f, 1000000000f, 50000000000f, 1000000000000f, 100000000000000f };
 
     public static float[] upgradePerSecond = { 0.2f / 15f, 1f / 15f, 8f / 15f, 47f / 15f, 260f / 15f, 1400f / 15f, 7800f / 15f, 44000f / 15f, 260000f / 15f, 1600000f / 15f, 10000000f / 15f, 65000000f / 15f, 430000000f / 15f };
     public static float[] upgradeInfoPerSecond = { 0.2f, 1f, 8f, 47f, 260f, 1400f, 7800f, 44000f, 260000f, 1600000f, 10000000f, 65000000f, 430000000f};
@@ -24,11 +24,9 @@ public static class Settings
 
     public static float[] upgradesMultiplayers = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
-    public static float[] passiveUpgradeCost = { 10, 50, 100, 200};
+    public static float[] passiveUpgradeCost = { 150f, 1000f, 5000f, 10000, 25000f, 50000f, 75000f, 100000f, 250000f, 500000f, 750000f, 1000000f, 5000000f, 10000000f, 50000000f, 100000000f, 500000000f, 10000000000f, 500000000000f, 1000000000000f, 100000000000000f };
     public static float[] passiveUpgradeBonus = { 2, 1.2f, 0.8f };
-    public static string[] bonusText = { "increases by ", "increases by", "decreases price by" };
-
-    public static float[] passiveUpgradeInfoBonus = { 0.2f, 1f, 2, };
+    public static string[] bonusText = { "doubles click efficiency", "increases the effience by 20%", "decreases the price by 20%" };
 
     //stats
     public static float totalAmount;
@@ -38,7 +36,7 @@ public static class Settings
     public static float totalAmountOfWatchedAdx10;
     public static float totalAmountOfWatchedAdx2;
 
-    public static bool[] passiveUpsUnlocked = new bool[6]; //passiveUpgradeCost.Length
+    public static bool[] passiveUpsUnlocked = new bool[30]; //passiveUpgradeCost.Length
 
     //settings
     public static bool isMusicOn = true;
@@ -48,9 +46,9 @@ public static class Settings
 
     //save
     public static string GameScene = "MainScene";
-    public static bool[] openedActiveUps = new bool[13];//changelater
-    public static bool[] openedPassiveUps = new bool[6];//changelater
-    public static bool[] boughtPassiveUp = new bool[6];//changelater
+    public static bool[] openedActiveUps = new bool[15];//changelater
+    public static bool[] openedPassiveUps = new bool[30];//changelater
+    public static bool[] boughtPassiveUps = new bool[30];//changelater
 
 
     //format
@@ -154,7 +152,7 @@ public static class Settings
         passiveUpsUnlocked = new bool[6]; //passiveUpgradeCost.Length
         openedActiveUps = new bool[6];//changelater
         openedPassiveUps = new bool[6];//changelater
-        boughtPassiveUp = new bool[6];//changelater
+        boughtPassiveUps = new bool[6];//changelater
 
         isMusicOn = true;
         isParticlesOn = true;

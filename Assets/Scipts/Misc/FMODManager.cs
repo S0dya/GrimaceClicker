@@ -5,7 +5,6 @@ using FMODUnity;
 
 public class FMODManager : SingletonMonobehaviour<FMODManager>
 {
-    [field: SerializeField] public EventReference Ambience { get; private set; }
     [field: SerializeField] public EventReference Music { get; private set; }
     
     [field: Header("UI")]

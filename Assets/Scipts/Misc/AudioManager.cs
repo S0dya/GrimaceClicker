@@ -27,11 +27,12 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
 
     void Start()
     {
-        //EventInstancesDict.Add("Music", CreateInstance(FMODManager.I.Music));
-        EventInstancesDict.Add("Ambience", CreateInstance(FMODManager.I.Ambience));
+        EventInstancesDict.Add("Music", CreateInstance(FMODManager.I.Music));
 
         EventInstancesDict.Add("ButtonPress", CreateInstance(FMODManager.I.ButtonPress));
         EventInstancesDict.Add("ButtonPressDownBar", CreateInstance(FMODManager.I.ButtonPressDownBar));
+
+        EventInstancesDict["Music"].start();
     }
 
     public void SetParameter(string instanceName, string parameterName, float value)

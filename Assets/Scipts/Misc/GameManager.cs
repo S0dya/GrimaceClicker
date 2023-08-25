@@ -63,7 +63,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SaveManager.I.SaveDataToFile();
+            InfoPanel.I.ToggleInfo(false);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -179,9 +179,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
     {
         if (inUpgrade)
         {
+            InfoPanel.I.ToggleInfo(false);
             updgradeTab.SetActive(false);
             inUpgrade = false;
-            InfoPanel.I.ToggleInfo(false);
             InfoPanelPassive.I.ToggleInfo(false);
         }
         else if (inStats)
@@ -358,7 +358,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         sceneSave.boolArrayDictionary.Add("passiveUpsUnlocked", Settings.passiveUpsUnlocked);
         sceneSave.boolArrayDictionary.Add("openedActiveUps", Settings.openedActiveUps);
         sceneSave.boolArrayDictionary.Add("openedPassiveUps", Settings.openedPassiveUps);
-        sceneSave.boolArrayDictionary.Add("boughtPassiveUp", Settings.boughtPassiveUp);
+        sceneSave.boolArrayDictionary.Add("boughtPassiveUps", Settings.boughtPassiveUps);
 
         //settings
         sceneSave.boolDictionary.Add("isMusicOn", Settings.isMusicOn);
@@ -458,9 +458,9 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
                 {
                     Settings.openedPassiveUps = openedPassiveUps;
                 }
-                if (sceneSave.boolArrayDictionary.TryGetValue("boughtPassiveUp", out bool[] boughtPassiveUp))
+                if (sceneSave.boolArrayDictionary.TryGetValue("boughtPassiveUps", out bool[] boughtPassiveUps))
                 {
-                    Settings.boughtPassiveUp = boughtPassiveUp;
+                    Settings.boughtPassiveUps = boughtPassiveUps;
                 }
 
             }

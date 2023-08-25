@@ -7,9 +7,8 @@ using TMPro;
 public class InfoPanelPassive : SingletonMonobehaviour<InfoPanelPassive>
 {
     [SerializeField] TextMeshProUGUI bonusType;
-    [SerializeField] TextMeshProUGUI bonus;
 
-    int curI;
+    int curI = -1;
 
     protected override void Awake()
     {
@@ -19,10 +18,17 @@ public class InfoPanelPassive : SingletonMonobehaviour<InfoPanelPassive>
 
     void Start()
     {
-        curI = -1;
+        ToggleInfo(false);
     }
 
-    public void SetInfo(int i, int type, Vector2 pos)
+    //button
+    public void OnCloseButton()
+    {
+        ToggleInfo(false);
+    }
+
+    //otherMethods
+    public void SetInfo(int i, int type)
     {
         if (curI == i)
         {
@@ -31,16 +37,12 @@ public class InfoPanelPassive : SingletonMonobehaviour<InfoPanelPassive>
         }
         curI = i;
         bonusType.text = Settings.bonusText[type];
-        bonus.text = Settings.passiveUpgradeBonus[type].ToString();
-
-        transform.position = pos;
 
         ToggleInfo(true);
     }
 
     public void ToggleInfo(bool val)
     {
-        Debug.Log(val);
         if (!val)
         {
             curI = -1;

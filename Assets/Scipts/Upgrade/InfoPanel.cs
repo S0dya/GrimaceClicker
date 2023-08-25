@@ -10,7 +10,7 @@ public class InfoPanel : SingletonMonobehaviour<InfoPanel>
     [SerializeField] TextMeshProUGUI amount;
     [SerializeField] TextMeshProUGUI madeSoFar;
 
-    int curI;
+    int curI = -1;
 
     protected override void Awake()
     {
@@ -20,10 +20,17 @@ public class InfoPanel : SingletonMonobehaviour<InfoPanel>
 
     void Start()
     {
-        curI = -1;
+        ToggleInfo(false);
     }
 
-    public void SetInfo(int i, Vector2 pos)
+    //button
+    public void OnCloseButton()
+    {
+        ToggleInfo(false);
+    }
+    
+    //otherMethods
+    public void SetInfo(int i)
     {
         if (curI == i)
         {
@@ -34,8 +41,6 @@ public class InfoPanel : SingletonMonobehaviour<InfoPanel>
         perSecondAmount.text = Settings.upgradeInfoPerSecond[i].ToString();
         amount.text = Settings.upgradeInfoAmount[i].ToString();
         madeSoFar.text = Settings.upgradeInfoSoFar[i].ToString();
-
-        transform.position = pos;
 
         ToggleInfo(true);
     }
