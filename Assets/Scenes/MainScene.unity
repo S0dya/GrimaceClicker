@@ -3348,12 +3348,12 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_RaycastPadding: {x: 10, y: 10, z: 10, w: 10}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7177ac36321ece04097252e81c61dd23, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4c8d0de6130f6b46a28b57e3041a4c7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14524,10 +14524,10 @@ RectTransform:
   m_Father: {fileID: 1849953216}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.26022223, y: 0.349625}
-  m_AnchorMax: {x: 0.73700005, y: 0.6194376}
-  m_AnchoredPosition: {x: 0, y: 0.5}
-  m_SizeDelta: {x: 0, y: -5}
+  m_AnchorMin: {x: 0.30400002, y: 0.37052083}
+  m_AnchorMax: {x: 0.71500003, y: 0.66200006}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &589905480
 GameObject:
@@ -16197,7 +16197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DOUBLE SCORE
+  m_text: X10 SCORE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ed0ef222e9d1a5409377b7f7b76a97e, type: 2}
   m_sharedMaterial: {fileID: -4152050663385349544, guid: 5ed0ef222e9d1a5409377b7f7b76a97e, type: 2}
@@ -17690,8 +17690,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 7177ac36321ece04097252e81c61dd23, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -25422,7 +25422,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DOUBLE MULTIPLIER
+  m_text: X2 MULTIPLIER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ed0ef222e9d1a5409377b7f7b76a97e, type: 2}
   m_sharedMaterial: {fileID: -4152050663385349544, guid: 5ed0ef222e9d1a5409377b7f7b76a97e, type: 2}

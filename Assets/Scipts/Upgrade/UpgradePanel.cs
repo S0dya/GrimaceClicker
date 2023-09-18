@@ -233,6 +233,7 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
 
         for (int i = 0; i < upgradeBars.Length; i++)
         {
+            Debug.Log(Settings.upgradeCost[i]);
             upgradeBars[i].UpdatePrice(Settings.upgradeCost[i]);
             upgradeBars[i].Lock();
 
@@ -241,7 +242,7 @@ public class UpgradePanel : SingletonMonobehaviour<UpgradePanel>
 
         for (int i = 0; i < passiveUpgradeTabs.Length; i++)
         {
-            passiveUpgradeTabs[i].UpdatePrice(Settings.upgradeCost[i]);
+            passiveUpgradeTabs[i].UpdatePrice(Settings.passiveUpgradeCost[i]);
             passiveUpgradeTabs[i].Lock();
         }
     }

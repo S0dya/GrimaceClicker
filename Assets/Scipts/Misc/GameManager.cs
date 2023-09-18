@@ -50,6 +50,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         SaveManager.I.SaveDataToFile();
         SaveManager.I.LoadDataFromFile();
 
+
+
         if (Settings.upgradeMultiplayerPerSec != 0)
         {
             UpdateMultiplayer();
@@ -61,19 +63,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            InfoPanel.I.ToggleInfo(false);
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SaveManager.I.LoadDataFromFile();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Settings.scoreVal += 1000;
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (inNewGame)
@@ -89,8 +78,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
                 ClosePrevTabs();
             }
         }
-
-        //Debug.Log(inGame + " " + inUpgrade + " " + inStats + " " + inSettings);
     }
 
     void FixedUpdate()
@@ -204,12 +191,19 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         Settings.clickMultiplayer *= (val ? 2 : 0.5f);
         Settings.upgradeMultiplayer *= (val ? 2 : 0.5f);
         Settings.upgradeMultiplayerPerSec *= (val ? 2 : 0.5f);
+        UpdateMultiplayer();
 
+        if (bonusCor != null)
+        {
+            StopCoroutine(bonusCor);
+        }
+        
         if (val)
         {
             scoreText.color = bonusColor;
             multiplayerText.color = bonusColor;
             StartBlinking();
+            bonusCor = StartCoroutine(BonusCor());
         }
         else
         {
@@ -219,16 +213,11 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
             BonusButton.I.SetNextBonus();
         }
         
-        if (bonusCor != null)
-        {
-            StopCoroutine(bonusCor);
-        }
-        bonusCor = StartCoroutine(BonusCor());
         bonusPanel.SetActive(val);
     }
     IEnumerator BonusCor()
     {
-        int duration = Random.Range(65, 120);
+        int duration = Random.Range(65, 90);
         bonusCoctailTextTimer.text = FormatToTimer(duration);
         while (duration > 0)
         {
@@ -259,11 +248,6 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         bonusCanvasGroup.alpha = 1f;
     }
 
-    void SetSettings()
-    {
-
-    }
-
 
     //newGameMethods
     public void ToggleNewGame(bool val)
@@ -280,6 +264,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         }
     }
 
+
     //gameManagerMethods
     void OnApplicationPause(bool pauseStatus)
     {
@@ -292,13 +277,26 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
     {
         if (!hasFocus)
         {
+            Settings.lastExitTime = System.DateTimeOffset.Now.ToUnixTimeSeconds();
             SaveManager.I.SaveDataToFile();
+        }
+        else
+        {
+            long last = Settings.lastExitTime;
+            if (last != 0)
+            {
+                long cur = System.DateTimeOffset.Now.ToUnixTimeSeconds();
+                Settings.scoreVal += (cur - last) * Settings.upgradeMultiplayerPerSec;
+            }
         }
     }
     void OnApplicationQuit()
     {
         SaveManager.I.SaveDataToFile();
     }
+
+
+
 
     //save
     void OnEnable()
@@ -331,6 +329,7 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         sceneSave.intDictionary = new Dictionary<string, int>();
         sceneSave.boolArrayDictionary = new Dictionary<string, bool[]>();
         sceneSave.boolDictionary = new Dictionary<string, bool>();
+        sceneSave.longDictionary = new Dictionary<string, long>();
 
         //game
         sceneSave.floatDictionary.Add("scoreVal", Settings.scoreVal);
@@ -363,6 +362,8 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         //settings
         sceneSave.boolDictionary.Add("isMusicOn", Settings.isMusicOn);
         sceneSave.boolDictionary.Add("isParticlesOn", Settings.isParticlesOn);
+
+        sceneSave.longDictionary.Add("lastExitTime", Settings.lastExitTime);
 
         GameObjectSave.sceneData.Add(Settings.GameScene, sceneSave);
         return GameObjectSave;
@@ -473,6 +474,13 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
                 if (sceneSave.boolDictionary.TryGetValue("isParticlesOn", out bool isParticlesOn))
                 {
                     Settings.isParticlesOn = isParticlesOn;
+                }
+            }
+            if (sceneSave.longDictionary != null)
+            {
+                if (sceneSave.longDictionary.TryGetValue("lastExitTime", out long lastExitTime))
+                {
+                    Settings.lastExitTime = lastExitTime;
                 }
             }
         }

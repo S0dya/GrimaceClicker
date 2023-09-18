@@ -8,4 +8,5 @@ public class SceneSave
     public Dictionary<string, float[]> floatArrayDictionary;
     public Dictionary<string, bool> boolDictionary;
     public Dictionary<string, bool[]> boolArrayDictionary;
+    public Dictionary<string, long> longDictionary;
 }
