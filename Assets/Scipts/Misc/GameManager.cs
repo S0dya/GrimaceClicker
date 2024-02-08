@@ -7,21 +7,21 @@ using static LeanTween;
 
 public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
 {
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI multiplayerText;
     public Color bonusColor;
     [SerializeField] Color standardColor;
 
-    [SerializeField] GameObject bonusPanel;
-    [SerializeField] CanvasGroup bonusCanvasGroup;
-    [SerializeField] TextMeshProUGUI bonusCoctailTextBonusX2;//dellater
-    [SerializeField] TextMeshProUGUI bonusCoctailTextTimer;
+    TextMeshProUGUI scoreText;
+    TextMeshProUGUI multiplayerText;
+    
+    GameObject bonusPanel;
+    CanvasGroup bonusCanvasGroup;
+    TextMeshProUGUI bonusCoctailTextBonusX2;
+    TextMeshProUGUI bonusCoctailTextTimer;
 
-    [SerializeField] GameObject updgradeTab;
-    [SerializeField] GameObject statsTab;
-    [SerializeField] GameObject settingsTab;
-
-    [SerializeField] GameObject newGameTab;
+    GameObject updgradeTab;
+    GameObject statsTab;
+    GameObject settingsTab;
+    GameObject newGameTab;
 
     Coroutine bonusCor;
 
@@ -40,10 +40,36 @@ public class GameManager : SingletonMonobehaviour<GameManager>, ISaveable
         base.Awake();
         GameObjectSave = new GameObjectSave();
 
+        scoreText = GetActiveObj("ScoreText").GetComponent<TextMeshProUGUI>();
+        multiplayerText = GetActiveObj("MultiplayerText").GetComponent<TextMeshProUGUI>();
+        bonusPanel = GetActiveObj("BonusText");
+        bonusCanvasGroup = bonusPanel.GetComponent<CanvasGroup>();
+        bonusCoctailTextBonusX2 = bonusPanel.GetComponent<TextMeshProUGUI>();
+        bonusCoctailTextTimer = bonusPanel.GetComponentInChildren<TextMeshProUGUI>();
+
+        updgradeTab = GetActiveObj("UpgradeTab");
+        statsTab = GetActiveObj("StatsTab");
+        settingsTab = GetActiveObj("SettingsTab");
+        newGameTab = GetActiveObj("NewGameTab");
 
         bonusCoctailTextTimer.color = bonusColor;
         bonusCoctailTextBonusX2.color = bonusColor;
+
+        bonusPanel.SetActive(false);
+
+        updgradeTab.SetActive(false);
+        statsTab.SetActive(false);
+        settingsTab.SetActive(false);
+        newGameTab.SetActive(false);
     }
+    GameObject GetActiveObj(string tag)
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag(tag);
+
+        foreach (var obj in objs) if (obj.activeSelf) return obj;
+        return null;
+    }
+
 
     void Start()
     {
